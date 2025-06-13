@@ -125,7 +125,7 @@ export const BreakdownTable: React.FC<BreakdownTableProps> = ({
             </thead>
             
             <tbody className="divide-y divide-gray-200">
-              {sortedData.map((row, index) => (
+              {sortedData.map(row => (
                 <tr key={row.name} className="hover:bg-gray-50 transition-colors">
                   <td className="px-6 py-4 whitespace-nowrap">
                     <div className="font-medium text-gray-900">{row.name}</div>
