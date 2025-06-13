@@ -1,4 +1,4 @@
-import { MetricData, ChartDataPoint, FunnelData, BreakdownRow, AttachData, TrendViewType } from '../types/analytics';
+import { MetricData, ChartDataPoint, FunnelData, BreakdownRow, AttachData } from '../types/analytics';
 
 export const mockMetrics: MetricData[] = [
   {
@@ -26,7 +26,7 @@ export const mockMetrics: MetricData[] = [
     format: 'currency'
   },
   {
-    title: 'Converstion Rate (Web)',
+    title: 'Conversion Rate (Web)',
     value: '10%',
     change: { yoy: 18.3, qoq: 6.2, wow: 1.9 },
     format: 'number'

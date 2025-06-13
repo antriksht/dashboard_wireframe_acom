@@ -16,14 +16,18 @@ export interface FilterState {
   entitlementType: string[];
   segment: string[];
   surface: string[];
+  subsurface: string[];
   weekQuarterYear: string[];
   quarterYear: string[];
   dateRange: {
     start: string;
     end: string;
   };
-  channel: string[];
-  device: string[];
+  entrypage: string[];
+  purchasetype: string[];
+  loggedInStatus: string[];
+  devices: string[];
+  marketingchannel: string[];
   compareMode: boolean;
 }
 

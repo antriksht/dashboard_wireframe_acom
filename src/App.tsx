@@ -16,7 +16,7 @@ import { FilterState } from './types/analytics';
 
 function App() {
   const [activeTab, setActiveTab] = React.useState('overview');
-  const [showAsPercentage, setShowAsPercentage] = React.useState(false);
+  const [showAsPercentage] = React.useState(false);
   const [selectedMetrics, setSelectedMetrics] = React.useState(['Orders', 'CVR%', 'GNARR']);
   const [filters, setFilters] = React.useState<FilterState>({
     region: [],

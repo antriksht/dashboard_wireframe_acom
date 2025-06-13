@@ -2,6 +2,7 @@ import React from 'react';
 import { Card, CardHeader, CardContent } from './ui/Card';
 import { Button } from './ui/Button';
 import { generateTrendData } from '../utils/mockData';
+import { ChartDataPoint } from '../types/analytics';
 
 const metrics = ['Orders', 'CVR%', 'GNARR'];
 const colors = ['#1f77b4', '#ff7f0e', '#2ca02c'];
@@ -12,15 +13,16 @@ interface TrendChartProps {
   availableMetrics: string[];
 }
 
-const TrendGridChart: React.FC<TrendChartProps> = ({ selectedMetrics, onMetricsChange, availableMetrics }) => {
+const TrendGridChart: React.FC<TrendChartProps> = ({ selectedMetrics }) => {
   const [viewType, setViewType] = React.useState<'WoW' | 'QoQ'>('WoW');
-  const [data, setData] = React.useState<Record<string, number[]>>({}); // Updated type
+  // Store trend data for each metric
+  const [data, setData] = React.useState<Record<string, ChartDataPoint[]>>({});
 
   React.useEffect(() => {
     const newData = selectedMetrics.reduce((acc, metric) => {
       acc[metric] = generateTrendData(viewType, [metric]);
       return acc;
-    }, {} as Record<string, number[]>);
+    }, {} as Record<string, ChartDataPoint[]>);
     setData(newData);
   }, [viewType, selectedMetrics]); // Added selectedMetrics dependency
 
@@ -32,7 +34,7 @@ const TrendGridChart: React.FC<TrendChartProps> = ({ selectedMetrics, onMetricsC
       value: Number(p[metric]) * (0.9 + Math.random() * 0.2) // Simulated YoY data
     }));
 
-    const lines = (points: any[], stroke: string) => {
+    const lines = (points: Array<{ value: number }>, stroke: string) => {
       const linePath = points.reduce((path, point, i) => {
         const x = (i / (points.length - 1)) * 100;
         const y = 100 - (point.value / max) * 100;

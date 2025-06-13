@@ -13,7 +13,7 @@ export const FilterPanel: React.FC<FilterPanelProps> = ({
   filters,
   onFiltersChange
 }) => {
-  const updateFilter = (key: keyof FilterState, value: any) => {
+  const updateFilter = (key: keyof FilterState, value: string | string[]) => {
     onFiltersChange({
       ...filters,
       [key]: value
@@ -41,7 +41,7 @@ export const FilterPanel: React.FC<FilterPanelProps> = ({
           />
 
           <Select
-            value={filters.region}
+            value={filters.surface}
             onChange={(value) => updateFilter('surface', value)}
             options={filterOptions.surface}
             placeholder="Surface"
@@ -49,7 +49,7 @@ export const FilterPanel: React.FC<FilterPanelProps> = ({
           />
 
           <Select
-            value={filters.region}
+            value={filters.subsurface}
             onChange={(value) => updateFilter('subsurface', value)}
             options={filterOptions.subsurface}
             placeholder="Sub-Surface"
@@ -81,7 +81,7 @@ export const FilterPanel: React.FC<FilterPanelProps> = ({
           />
           
           <Select
-            value={filters.entitlementType}
+            value={filters.loggedInStatus}
             onChange={(value) => updateFilter('loggedInStatus', value)}
             options={filterOptions.loggedInStatus}
             placeholder="Logged in Status"
@@ -105,7 +105,7 @@ export const FilterPanel: React.FC<FilterPanelProps> = ({
           />
 
           <Select
-            value={filters.segment}
+            value={filters.entrypage}
             onChange={(value) => updateFilter('entrypage', value)}
             options={filterOptions.entrypage}
             placeholder="Entry Page"
@@ -113,7 +113,7 @@ export const FilterPanel: React.FC<FilterPanelProps> = ({
           />
 
           <Select
-            value={filters.segment}
+            value={filters.purchasetype}
             onChange={(value) => updateFilter('purchasetype', value)}
             options={filterOptions.purchasetype}
             placeholder="Purchase Type"
@@ -121,7 +121,7 @@ export const FilterPanel: React.FC<FilterPanelProps> = ({
           />
 
           <Select
-            value={filters.segment}
+            value={filters.devices}
             onChange={(value) => updateFilter('devices', value)}
             options={filterOptions.devices}
             placeholder="Device"
@@ -129,7 +129,7 @@ export const FilterPanel: React.FC<FilterPanelProps> = ({
           />
 
           <Select
-            value={filters.segment}
+            value={filters.marketingchannel}
             onChange={(value) => updateFilter('marketingchannel', value)}
             options={filterOptions.marketingchannel}
             placeholder="LTC"
