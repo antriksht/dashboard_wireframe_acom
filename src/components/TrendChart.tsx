@@ -34,9 +34,11 @@ const TrendGridChart: React.FC<TrendChartProps> = ({ selectedMetrics }) => {
       value: Number(p[metric]) * (0.9 + Math.random() * 0.2) // Simulated YoY data
     }));
 
+    const barWidth = 100 / points.length;
+
     const lines = (points: Array<{ value: number }>, stroke: string) => {
       const linePath = points.reduce((path, point, i) => {
-        const x = (i / (points.length - 1)) * 100;
+        const x = (i + 0.5) * barWidth;
         const y = 100 - (point.value / max) * 100;
         return `${path}${i === 0 ? 'M' : 'L'} ${x} ${y} `;
       }, '');
@@ -48,29 +50,31 @@ const TrendGridChart: React.FC<TrendChartProps> = ({ selectedMetrics }) => {
     return (
       <div className="bg-white border p-4 rounded-lg">
         <h4 className="text-sm font-semibold text-gray-700 mb-2">{metric}</h4>
-        <div className="relative h-40 w-full">
-          <svg width="100%" height="100%">
+        <div className="relative h-40 w-full pb-6">
+          <svg width="100%" height="100%" className="overflow-visible">
             <g>{lines(prevPoints, '#ccc')}</g>
-            <g>{lines(points.map(p => ({ value: Number(p[metric]), period: p.period })), color)}</g>
             {points.map((p, i) => {
-              const x = (i / (points.length - 1)) * 100;
-              const y = 100 - (Number(p[metric]) / max) * 100;
+              const x = i * barWidth;
+              const height = (Number(p[metric]) / max) * 100;
               return (
-                <circle
+                <rect
                   key={i}
-                  cx={`${x}%`}
-                  cy={`${y}%`}
-                  r={3}
+                  x={`${x}%`}
+                  y={`${100 - height}%`}
+                  width={`${barWidth - 1}%`}
+                  height={`${height}%`}
                   fill={color}
                 >
                   <title>{`${p.period}: ${p[metric]}`}</title>
-                </circle>
+                </rect>
               );
             })}
           </svg>
-          <div className="absolute bottom-0 left-0 right-0 flex justify-between text-[6px] text-gray-500">
+          <div className="absolute bottom-0 left-0 right-0 flex justify-between text-[8px] text-gray-500">
             {points.map((p, i) => (
-              <span key={i}>{p.period}</span>
+              <span key={i} className="transform -rotate-45 origin-left whitespace-nowrap">
+                {p.period}
+              </span>
             ))}
           </div>
         </div>
